@@ -1,9 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	<section>
-		<h1>Pas de création en cours</h1>
-		<p>{{ id_createur }}</p>
-
-	</div>
+    <section>
+        <h1>Pas de création en cours</h1>
+        {% if idCreateur %}
+            <p>Votre identifiant de créateur est : {{ idCreateur }}</p>
+        {% else %}
+            <p>Vous n'êtes pas connecté.</p>
+        {% endif %}
+		<a href="{{ url('/createurs/logout') }}">Déconnectez-vous</a>
+    </section>
 {% endblock %}
