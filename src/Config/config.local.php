@@ -6,7 +6,7 @@
 /**
  * le DSN de la base
  */
-define('APP_DB_DSN', 'mysql:host=localhost;dbname=???????;charset=UTF8');
+define('APP_DB_DSN', 'mysql:host=localhost;dbname=easycrea;charset=UTF8');
 
 /**
  * le nom de l'utilisateur MYSQL

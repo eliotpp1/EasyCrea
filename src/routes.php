@@ -8,23 +8,22 @@ les routes
  */
 
 return [
+    // gèrer l'acceuil
+    ['GET', '/', 'createur@login'],
 
-    // accueil et affichage pour les avatars
-    ['GET', '/avatars', 'avatar@index'],
-    ['GET', '/', 'avatar@index'],
+    // gérer la creations de createurs
+    ['GET', '/createurs/register', 'createur@register'],
+    ['POST', '/createurs/register', 'createur@register'],
 
-    // afficher le formulaire d'ajout d'un nouvel avatar
-    ['GET', '/avatars/ajouter', 'avatar@create'],
-    // enregistrer les données soumises d'un nouvel avatar
-    ['POST', '/avatars/ajouter', 'avatar@create'],
 
-    // afficher le formulaire d'édition un avatar existant
-    // à compléter ...
+    // gérer les connexions de créateurs
+    ['GET', '/createurs/login', 'createur@login'],
+    ['POST', '/createurs/login', 'createur@login'],
 
-    // enregistrer les modifications sur un avatar existant
-    // à compléter ...
+    // gérer les déconnexions de créateurs
+    ['GET', '/createurs/logout', 'createur@logout'],
 
-    // effacer un avatar
-    ['GET', '/avatars/effacer/{id:\d+}', 'avatar@delete'],
+    // gérer les action quand utilisateur est connecté
+    ['GET', '/game', 'game@index'],
 
 ];

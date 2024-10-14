@@ -2,6 +2,7 @@
 /*
   Fichier : src/Model/Model.php
 */
+
 declare(strict_types=1);
 
 namespace App\Model;
@@ -60,7 +61,7 @@ class Model
         }
     }
 
-     /**
+    /**
      * Retourne les informations d'un identifiant.
      *
      * @param  integer  $id identifiant de la donnée
@@ -102,14 +103,24 @@ class Model
     public function findAllBy(
         array $criterias = []
     ): ?array {
-        // décomposer le tableau des critères
+        if (empty($criterias)) {
+            // Aucun critère fourni, retournez null ou l'ensemble des données selon le cas
+            return null;
+        }
+
+        $fields = [];
+        $values = [];
+
+        // Décomposer le tableau des critères
         foreach ($criterias as $f => $v) {
             $fields[] = "$f = ?";
             $values[] = $v;
         }
+
         // On transforme le tableau en chaîne de caractères séparée par des AND
         $fields_list = implode(' AND ', $fields);
         $sql = "SELECT * FROM `{$this->tableName}` WHERE $fields_list";
+
         return $this->query($sql, $values)->fetchAll();
     }
 
