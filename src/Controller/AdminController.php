@@ -6,12 +6,31 @@ namespace App\Controller;
 
 use App\Helper\HTTP;
 use App\Model\Admin;
+use App\Model\Carte;
+use App\Model\Deck;
 
 class AdminController extends Controller
-
 {
+    public function register()
+    {
+        if ($this->isGetMethod()) {
+            $this->display('admin/register.html.twig');
+        } else {
+            // 1. Vérifier les données soumises
+            // 2. Exécuter la requête d'insertion
+            Admin::getInstance()->create([
+                'ad_email_admin' => trim($_POST['email']),
+                'mdp_admin' => trim(password_hash($_POST['password'], PASSWORD_BCRYPT)),
+            ]);
+
+            // 3. Rediriger vers la page de connexion
+            HTTP::redirect('/admin/login');
+        }
+    }
+
     public function login()
     {
+        // Vérifie si la méthode de la requête est GET
         if ($this->isGetMethod()) {
             $this->display('admin/login.html.twig');
         } else {
@@ -24,42 +43,131 @@ class AdminController extends Controller
                 'ad_email_admin' => $email
             ]);
 
-            session_start([
-                'cookie_path' => '/',
-                'cookie_lifetime' => 0,
-                'cookie_secure' => true,
-                'cookie_httponly' => true,
-                'cookie_samesite' => 'strict',
-            ]);
+            // Démarrer la session (à faire en début de script, normalement)
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start([
+                    'cookie_path' => '/',
+                    'cookie_lifetime' => 0,
+                    'cookie_secure' => true,
+                    'cookie_httponly' => true,
+                    'cookie_samesite' => 'Strict', // 'Strict' pour le paramètre SameSite
+                ]);
+            }
 
-            // 3. Si le créateur est trouvé, vérifier le mot de passe
-            if ($admin && password_verify($password, $admin['mdp_createur'])) {
-                // 4. Stocker l'identifiant du créateur dans la session
-                $_SESSION['id_createur'] = $admin['id_createur'];
+            // Debugging : affiche les informations de l'admin et la session
+
+
+            // 3. Si l'administrateur est trouvé, vérifier le mot de passe
+            if ($admin && password_verify($password, $admin['mdp_admin'])) {
+                // 4. Stocker l'identifiant de l'administrateur dans la session
+                $_SESSION['id_administrateur'] = $admin['id_administrateur']; // Correction de 'id_adminstrateur' à 'id_admin'
 
                 // 5. Rediriger vers la page d'accueil
-                HTTP::redirect('/game');
+                HTTP::redirect('/createDeck');
             } else {
                 // 6. Sinon, afficher un message d'erreur
-                $this->display('createurs/login.html.twig', ['error' => 'Identifiant ou mot de passe incorrect']);
+                $this->display('admin/login.html.twig', ['error' => 'Identifiant ou mot de passe incorrect']);
             }
         }
     }
 
 
-
-
-
-    public function logout()
+    public function createDeck()
     {
-        session_start([
-            'cookie_path' => '/',
-            'cookie_lifetime' => 0,
-            'cookie_secure' => true,
-            'cookie_httponly' => true,
-            'cookie_samesite' => 'strict',
-        ]);
-        session_destroy();
-        HTTP::redirect('/');
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        if ($this->isGetMethod()) {
+            $this->display('admin/createDeck.html.twig');
+        } else {
+
+            // Récupérer les données du formulaire
+            $titreDeck = trim($_POST['titre_deck']);
+            $dateDebutDeck = trim($_POST['date_debut_deck']);
+            $dateFinDeck = trim($_POST['date_fin_deck']);
+            $nbCarte = (int)trim($_POST['nb_carte']); // Convertir en entie
+
+
+            // Vérifier si les choix sont bien définis
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                // Gérer l'erreur de JSON ici
+                $this->display('admin/createDeck.html.twig', ['error' => 'Valeurs de choix invalides.']);
+                return;
+            }
+
+            // 1. Créer un nouveau deck
+            $deckId = Deck::getInstance()->create([
+                'titre_deck' => $titreDeck,
+                'date_debut_deck' => $dateDebutDeck,
+                'date_fin_deck' => $dateFinDeck,
+                'nb_cartes' => $nbCarte,
+            ]);
+
+            $this->display('admin/createFirstCard.html.twig', compact('deckId'));
+        }
+    }
+
+
+    public function createFirstCard()
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        if ($this->isGetMethod()) {
+            $this->display('admin/createFirstCard.html.twig');
+        } else {
+            // Récupérer les données du formulaire
+            $texteCarte = trim($_POST['texte_carte']);
+            $valeursChoix1 = trim($_POST['valeurs_choix1']);
+            $valeursChoix2 = trim($_POST['valeurs_choix2']);
+            $deckId = (int)trim($_POST['deckId']);
+
+            // Vérifier si les valeurs des choix sont bien en JSON valide
+            $choix1Array = json_decode($valeursChoix1, true);
+            $choix2Array = json_decode($valeursChoix2, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                // Gérer l'erreur de JSON ici
+                $this->display('admin/createFirstCard.html.twig', [
+                    'error' => 'Valeurs de choix invalides. Veuillez fournir un JSON valide.'
+                ]);
+                return;
+            }
+
+            // Créer la carte
+            $carteCreated = Carte::getInstance()->create([
+                'date_soumission' => (new \DateTime())->format('Y-m-d'), // Format de date adapté
+                'ordre_soumission' => 1,
+                'valeurs_choix1' => json_encode($choix1Array), // Encode les données en JSON
+                'texte_carte' => $texteCarte,
+                'valeurs_choix2' => json_encode($choix2Array), // Encode les données en JSON
+                'id_deck' => $deckId,
+            ]);
+
+            // Vérifier si l'insertion a réussi
+            if ($carteCreated) {
+                // Rediriger vers une page de succès ou le tableau de bord
+                HTTP::redirect('/admin/dashboard');
+            } else {
+                // Afficher un message d'erreur si l'insertion a échoué
+                $this->display('admin/createFirstCard.html.twig', [
+                    'error' => 'Une erreur est survenue lors de la création de la carte.'
+                ]);
+            }
+        }
     }
 }

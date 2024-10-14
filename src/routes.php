@@ -8,24 +8,43 @@ les routes
  */
 
 return [
-    // gèrer l'acceuil
+    // Gérer l'accueil
     ['GET', '/', 'createur@login'],
 
-    // gérer la creations de createurs
+    // Gérer la création de créateurs
     ['GET', '/createurs/register', 'createur@register'],
     ['POST', '/createurs/register', 'createur@register'],
 
-    // gérer les connexions de créateurs
+    // Gérer les connexions de créateurs
     ['GET', '/createurs/login', 'createur@login'],
     ['POST', '/createurs/login', 'createur@login'],
 
-    // gérer les déconnexions de créateurs
+    // Gérer les déconnexions de créateurs
     ['GET', '/createurs/logout', 'createur@logout'],
 
-    // gérer les actions quand utilisateur est connecté
+    // Gérer les actions quand utilisateur est connecté
     ['GET', '/game', 'game@index'],
 
-    // gérer la déconnexion de l'utilisateur
+    // Gérer la déconnexion de l'utilisateur
     ['GET', '/createur/logout', 'createur@logout'],
+
+    // Gérer la création de l'administrateur
+    ['GET', '/admin/register', 'admin@register'],
+    ['POST', '/admin/register', 'admin@register'],
+
+    // Gérer la connexion des administrateurs
+    ['GET', '/admin/login', 'admin@login'],
+    ['POST', '/admin/login', 'admin@login'],
+
+    // Gérer les déconnexions des administrateurs
+    ['GET', '/admin/logout', 'admin@logout'],
+
+    // Gérer les actions quand admin est connecté
+    ['GET', '/createDeck', 'admin@createDeck'],
+    ['POST', '/createDeck', 'admin@createDeck'],
+    ['GET', '/createFirstCard', 'admin@createFirstCard'],
+    ['POST', '/createFirstCard', 'admin@createFirstCard'],
+    // Gérer le tableau de bord de l'administrateur
+    ['GET', '/admin/dashboard', 'admin@dashboard'],
 
 ];

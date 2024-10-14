@@ -473,3 +473,451 @@
     exception-line: 75
     exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\CreateurController.php'
     exception-code: 'session_destroy(): Trying to destroy uninitialized session'
+[2024-10-14 15:43:40]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 15:46:46]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 15:47:39]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 15:50:49]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 15:51:14]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 15:53:42]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 15:57:52]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 16:01:22]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 16:07:20]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 16:08:25]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 16:08:44]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@register',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'easycrea.adminstrateur' doesn't exist'
+[2024-10-14 16:26:47]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 54
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:29:12]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 54
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:29:25]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 54
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:32:13]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 53
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:32:25]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 53
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:34:45]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 53
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:35:11]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 53
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 16:36:02]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@login',
+        2 => array(),
+    )
+    exception-line: 53
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "id_admin"'
+[2024-10-14 17:22:19]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 83
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:30:45]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 88
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:31:58]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:32:00]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:32:06]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:32:24]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:32:26]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:32:28]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:39:48]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:40:35]	[ALERT]	404 - commande non existante :: /admin/createGame
+[2024-10-14 17:41:29]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:41:31]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:41:38]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 90
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "date_debut_deck"'
+[2024-10-14 17:41:57]	[ALERT]	404 - commande non existante :: /admin/createGame
+[2024-10-14 17:45:00]	[ALERT]	404 - commande non existante :: /admin/createGame
+[2024-10-14 17:45:21]	[ALERT]	404 - commande non existante :: /admin/createGame
+[2024-10-14 17:46:04]	[ALERT]	404 - commande non existante :: /admin/createGame
+[2024-10-14 17:47:55]	[ALERT]	404 - commande non existante :: /admin/createGame
+[2024-10-14 17:56:07]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:00:38]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:10:35]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createGame',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:17:59]	[ALERT]	404 - commande non existante :: /createGame
+[2024-10-14 18:28:13]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 138
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:33:53]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 138
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:37:27]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 139
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:38:00]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 139
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:39:05]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 139
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:42:55]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 139
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:43:21]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 139
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deck_id"'
+[2024-10-14 18:44:32]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 139
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\AdminController.php'
+    exception-code: 'Undefined array key "deckid"'
+[2024-10-14 18:44:53]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:45:13]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:49:54]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:53:27]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:55:12]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 18:57:57]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'
+[2024-10-14 19:02:33]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@createFirstCard',
+        2 => array(),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `carte.texte_carte` failed for `easycrea`.`carte`'

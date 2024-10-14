@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <h2>Créer la première carte</h2>
+            <form action="{{ url('/createFirstCard') }}" method="POST">
+                <label for="texte_carte">Texte de la carte :</label>
+                <textarea id="texte_carte" name="texte_carte" required></textarea><br>
+
+                <label for="valeurs_choix1">Valeurs choix 1 (JSON) :</label>
+                <textarea id="valeurs_choix1" name="valeurs_choix1" required></textarea><br>
+
+                <label for="valeurs_choix2">Valeurs choix 2 (JSON) :</label>
+                <textarea id="valeurs_choix2" name="valeurs_choix2" required></textarea><br>
+
+                <input type="hidden" name="deckId" value="{{ deckId }}">
+
+                <button type="submit">Créer</button>
+            </form>
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

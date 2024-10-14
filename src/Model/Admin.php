@@ -8,5 +8,5 @@ class Admin extends Model
 {
     use TraitInstance;
 
-    protected $tableName = APP_TABLE_PREFIX . 'adminstrateur';
+    protected $tableName = APP_TABLE_PREFIX . 'administrateur';
 }
