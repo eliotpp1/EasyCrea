@@ -150,6 +150,7 @@ class AdminController extends Controller
                 'texte_carte' => $texteCarte,
                 'valeurs_choix2' => $valeur_choixFinal2,
                 'id_deck' => $deckId,
+                'id_administrateur' => $_SESSION['id_administrateur'],
             ]);
 
             // Vérifier si l'insertion a réussi

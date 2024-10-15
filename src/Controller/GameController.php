@@ -82,7 +82,6 @@ class GameController extends Controller
             $valeursChoix2 = htmlspecialchars(trim($_POST['valeurs_choix2bis'] . ',' . $_POST['valeurs_choix2']));
 
             $carteDansLeDeck = Carte::getInstance()->getNumberOfCardsInDeck($deck['id_deck']); // Méthode pour récupérer le nombre de cartes dans le deck
-            dd($idCreateur);
 
 
             if ($carteDansLeDeck < $totalCartes) {
@@ -96,7 +95,7 @@ class GameController extends Controller
                     'texte_carte' => $texteCarte,
                     'valeurs_choix2' => $valeursChoix2,
                     'id_deck' => $deck['id_deck'],
-                    'id_createur' => $idCreateur, // Ajoutez l'id_createur ici
+                    'id_createur' => $idCreateur,
                 ]);
 
                 // Rediriger vers la même page ou une autre page après l'ajout
