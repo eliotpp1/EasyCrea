@@ -76,33 +76,40 @@ class GameController extends Controller
 
         // Vérifiez si la requête est POST pour ajouter une carte
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupérer les données du formulaire
-            $texteCarte = htmlspecialchars(trim($_POST['texte_carte']));
-            $valeursChoix1 = htmlspecialchars(trim($_POST['valeurs_choix1'] . ',' . $_POST['valeurs_choix1bis']));
-            $valeursChoix2 = htmlspecialchars(trim($_POST['valeurs_choix2bis'] . ',' . $_POST['valeurs_choix2']));
-
-            $carteDansLeDeck = Carte::getInstance()->getNumberOfCardsInDeck($deck['id_deck']); // Méthode pour récupérer le nombre de cartes dans le deck
-
-
-            if ($carteDansLeDeck < $totalCartes) {
-                $ordreSoumission = $carteDansLeDeck + 1;
-
-                // Créer la carte
-                Carte::getInstance()->create([
-                    'date_soumission' => (new \DateTime())->format('Y-m-d'), // Format de date adapté
-                    'ordre_soumission' => $ordreSoumission,
-                    'valeurs_choix1' => $valeursChoix1,
-                    'texte_carte' => $texteCarte,
-                    'valeurs_choix2' => $valeursChoix2,
-                    'id_deck' => $deck['id_deck'],
-                    'id_createur' => $idCreateur,
-                ]);
-
-                // Rediriger vers la même page ou une autre page après l'ajout
-                HTTP::redirect('/game');
+            // Vérifier si le créateur a déjà créé une carte
+            $cardAlreadyCreated = Carte::getInstance()->getIfCreatorHasCreatedCard($idCreateur);
+            if ($cardAlreadyCreated) {
+                // Ne rien faire et afficher un message d'erreur
+                $error = "Vous avez déjà créé une carte.";
             } else {
-                // Afficher un message d'erreur si le deck est complet
-                $error = "Le deck est complet. Vous ne pouvez pas ajouter plus de cartes.";
+                // Récupérer les données du formulaire
+                $texteCarte = htmlspecialchars(trim($_POST['texte_carte']));
+                $valeursChoix1 = htmlspecialchars(trim($_POST['valeurs_choix1'] . ',' . $_POST['valeurs_choix1bis']));
+                $valeursChoix2 = htmlspecialchars(trim($_POST['valeurs_choix2bis'] . ',' . $_POST['valeurs_choix2']));
+
+                // Vérifier le nombre de cartes dans le deck
+                $carteDansLeDeck = Carte::getInstance()->getNumberOfCardsInDeck($deck['id_deck']); // Méthode pour récupérer le nombre de cartes dans le deck
+
+                if ($carteDansLeDeck < $totalCartes) {
+                    $ordreSoumission = $carteDansLeDeck + 1;
+
+                    // Créer la carte
+                    Carte::getInstance()->create([
+                        'date_soumission' => (new \DateTime())->format('Y-m-d'), // Format de date adapté
+                        'ordre_soumission' => $ordreSoumission,
+                        'valeurs_choix1' => $valeursChoix1,
+                        'texte_carte' => $texteCarte,
+                        'valeurs_choix2' => $valeursChoix2,
+                        'id_deck' => $deck['id_deck'],
+                        'id_createur' => $idCreateur,
+                    ]);
+
+                    // Rediriger vers la même page ou une autre page après l'ajout
+                    HTTP::redirect('/game');
+                } else {
+                    // Afficher un message d'erreur si le deck est complet
+                    $error = "Le deck est complet. Vous ne pouvez pas ajouter plus de cartes.";
+                }
             }
         }
 

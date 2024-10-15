@@ -40,10 +40,10 @@ class Carte extends Model
         return 0;
     }
 
-    public function getIfCreatorHasCreatedCard(int $creatorId, int $cardId)
+    public function getIfCreatorHasCreatedCard(int $creatorId)
     {
-        $sql = "SELECT * FROM carte WHERE id_createur = :creatorId AND id_carte = :cardId";
-        $stmt = $this->query($sql, [':creatorId' => $creatorId, ':cardId' => $cardId]);
+        $sql = "SELECT * FROM carte WHERE id_createur = :creatorId";
+        $stmt = $this->query($sql, [':creatorId' => $creatorId]);
         if ($stmt) {
             return $stmt->fetch();
         }

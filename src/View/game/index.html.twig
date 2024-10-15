@@ -2,7 +2,15 @@
 
 {% block content %}
     <div class="container">
-        <h1>{{ deck.titre_deck}}</h1>
+        <h1>{{ deck.titre_deck }}</h1>
+        
+        <!-- Afficher le message d'erreur s'il existe -->
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        
         <div class="d-flex flex-column align-items-center">
             {% for i in range(1, totalCartes) %}
                 <div class="col-12 col-md-8 mb-1">
