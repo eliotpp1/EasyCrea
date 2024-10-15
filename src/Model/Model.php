@@ -146,7 +146,7 @@ class Model
     public function exists(
         int $id
     ): bool {
-        $sql = "SELECT COUNT(*) AS c FROM `{$this->tableName}` WHERE id = :id";
+        $sql = "SELECT COUNT(*) AS c FROM `{$this->tableName}` WHERE :id = :id";
         $sth = $this->query($sql, [':id' => $id]);
         if ($sth) {
             return ($sth->fetch()['c'] > 0);
@@ -218,10 +218,17 @@ class Model
     public function delete(
         int $id
     ): bool {
-        $sql = "DELETE FROM `{$this->tableName}` WHERE id = :id";
+        // Déterminer le nom de la colonne en fonction de la table
+        $column = $this->tableName === 'deck' ? 'id_deck' : 'id_carte';
+
+        // Requête SQL pour supprimer l'enregistrement
+        $sql = "DELETE FROM `{$this->tableName}` WHERE {$column} = :id";
         $sth = $this->query($sql, [':id' => $id]);
+
+        // Vérifier si une ligne a été supprimée
         return $sth->rowCount() > 0;
     }
+
 
     /**
      * Excécute une requête.

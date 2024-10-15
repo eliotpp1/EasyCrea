@@ -63,7 +63,7 @@ class AdminController extends Controller
                 $_SESSION['id_administrateur'] = $admin['id_administrateur']; // Correction de 'id_adminstrateur' à 'id_admin'
 
                 // 5. Rediriger vers la page d'accueil
-                HTTP::redirect('/createDeck');
+                HTTP::redirect('/admin/dashboard');
             } else {
                 // 6. Sinon, afficher un message d'erreur
                 $this->display('admin/login.html.twig', ['error' => 'Identifiant ou mot de passe incorrect']);
@@ -134,27 +134,21 @@ class AdminController extends Controller
             $texteCarte = trim($_POST['texte_carte']);
             $valeursChoix1 = trim($_POST['valeurs_choix1']);
             $valeursChoix2 = trim($_POST['valeurs_choix2']);
+            $valeurs_choix1bis = trim($_POST['valeurs_choix1bis']);
+            $valeurs_choix2bis = trim($_POST['valeurs_choix2bis']);
             $deckId = (int)trim($_POST['deckId']);
 
-            // Vérifier si les valeurs des choix sont bien en JSON valide
-            $choix1Array = json_decode($valeursChoix1, true);
-            $choix2Array = json_decode($valeursChoix2, true);
+            $valeur_choixFinal = $valeursChoix1 . ',' . $valeurs_choix1bis;
+            $valeur_choixFinal2 = $valeursChoix2 . ',' . $valeurs_choix2bis;
 
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                // Gérer l'erreur de JSON ici
-                $this->display('admin/createFirstCard.html.twig', [
-                    'error' => 'Valeurs de choix invalides. Veuillez fournir un JSON valide.'
-                ]);
-                return;
-            }
 
             // Créer la carte
             $carteCreated = Carte::getInstance()->create([
                 'date_soumission' => (new \DateTime())->format('Y-m-d'), // Format de date adapté
                 'ordre_soumission' => 1,
-                'valeurs_choix1' => json_encode($choix1Array), // Encode les données en JSON
+                'valeurs_choix1' => $valeur_choixFinal,
                 'texte_carte' => $texteCarte,
-                'valeurs_choix2' => json_encode($choix2Array), // Encode les données en JSON
+                'valeurs_choix2' => $valeur_choixFinal2,
                 'id_deck' => $deckId,
             ]);
 
@@ -169,5 +163,93 @@ class AdminController extends Controller
                 ]);
             }
         }
+    }
+
+    public function dashboard()
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        // Récupérer les decks créés par l'administrateur
+        $decks = Deck::getInstance()->findAll();
+
+        // Afficher le tableau de bord
+        $this->display('admin/dashboard.html.twig', compact('decks'));
+    }
+
+    public function delete(int|string $id)
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        $id = (int)$id;
+        $type = $_GET['type'] ?? null; // Récupérer le paramètre 'type' depuis la requête
+
+        // Vérifier que le type est valide
+        if ($type === 'deck') {
+            Deck::getInstance()->delete($id);
+        } elseif ($type === 'carte') {
+            Carte::getInstance()->delete($id);
+        } else {
+            // Gérer le cas où le type est invalide
+            HTTP::redirect('/admin/dashboard?error=invalid_type');
+            return;
+        }
+
+        // Rediriger vers le tableau de bord après la suppression
+        HTTP::redirect('/admin/dashboard');
+    }
+
+
+
+
+
+    public function showDeck(int|string $id)
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        $id = (int)$id;
+
+        // Récupérer les cartes du deck
+        $cartes = Carte::getInstance()->findAllBy(['id_deck' => $id]);
+
+        // Afficher les cartes du deck
+        $this->display('admin/showDeck.html.twig', compact('cartes'));
+    }
+
+    public function logout()
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Détruire la session
+        session_destroy();
+
+        // Rediriger vers la page de connexion
+        HTTP::redirect('/admin/login');
     }
 }

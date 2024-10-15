@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <h2>Tous les decks</h2>
+            <a href="/createDeck" class="btn btn-primary">Ajouter un deck</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Date de début</th>
+                        <th scope="col">Date de fin</th>
+                        <th scope="col">Nombre de cartes</th>
+                        <th scope="col">Nombre de j'aimes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for deck in decks %}
+                        <tr>
+                            <td>{{ deck.titre_deck }}</td>
+                            <td>{{ deck.date_debut_deck|date('d/m/Y') }}</td>
+                            <td>{{ deck.date_fin_deck|date('d/m/Y') }}</td>
+                            <td>{{ deck.nb_cartes}}</td>
+                            <td>{{ deck.nb_jaime}}</td>
+                            <td>
+                                <a href="/admin/deck/{{ deck.id_deck }}" class="btn btn-primary">Voir deck</a>
+                            </td>
+
+                            <td>
+                                <a href="/admin/delete/{{ deck.id_deck }}?type=deck" class="btn btn-primary">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+        </div>
+    </section>
+{% endblock %}

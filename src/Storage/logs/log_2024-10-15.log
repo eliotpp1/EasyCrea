@@ -1,0 +1,54 @@
+[2024-10-15 9:45:57]	[ALERT]	500 - la méthode dashboard n'existe pas
+[2024-10-15 10:14:48]	[ALERT]	404 - commande non existante :: /admin/url('/admin/delete/8')
+[2024-10-15 10:19:54]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@delete',
+        2 => array(
+            'id' => '8',
+        ),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause''
+[2024-10-15 10:23:37]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@delete',
+        2 => array(
+            'id' => '33',
+        ),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause''
+[2024-10-15 10:25:21]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@delete',
+        2 => array(
+            'id' => '22',
+        ),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause''
+[2024-10-15 10:42:24]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@delete',
+        2 => array(
+            'id' => '1',
+        ),
+    )
+    exception-line: 241
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause''
+[2024-10-15 10:57:59]	[ALERT]	404 - commande non existante :: /admin/deck/2
+[2024-10-15 11:08:38]	[ALERT]	404 - commande non existante :: /admin/delete/2
+[2024-10-15 11:14:15]	[ALERT]	404 - commande non existante :: /admin/delete/2
+[2024-10-15 11:14:34]	[ALERT]	404 - commande non existante :: /admin/edit/2
+[2024-10-15 11:14:43]	[ALERT]	404 - commande non existante :: /admin/delete/2
+[2024-10-15 11:16:22]	[ALERT]	404 - commande non existante :: /admin/delete/2
+[2024-10-15 11:17:19]	[ALERT]	404 - commande non existante :: /admin/edit/3
+[2024-10-15 11:21:18]	[ALERT]	404 - commande non existante :: /admin/carte/3

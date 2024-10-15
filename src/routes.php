@@ -46,5 +46,9 @@ return [
     ['POST', '/createFirstCard', 'admin@createFirstCard'],
     // Gérer le tableau de bord de l'administrateur
     ['GET', '/admin/dashboard', 'admin@dashboard'],
+    ['GET', '/admin/delete/{id:\d+}', 'admin@delete'],
+
+    ['GET', '/admin/deck/{id:\d+}', 'admin@showDeck'],
+
 
 ];

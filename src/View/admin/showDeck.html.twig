@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <h2>Cartes du deck  </h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Texte carte</th>
+                        <th scope="col">Valeur choix 1</th>
+                        <th scope="col">Valeur choix 2</th>
+                        <th scope="col">Date de soumission</th>
+                        <th scope="col">Ordre de soumission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for carte in cartes %}
+                        <tr>
+                            <td>{{ carte.texte_carte }}</td>
+                            <td>{{ carte.valeurs_choix1 }}</td>
+                            <td>{{ carte.valeurs_choix2 }}</td>
+                            <td>{{ carte.date_soumission|date('d/m/Y') }}</td>
+                            <td>{{ carte.ordre_soumission }}</td> 
+                            <td>
+                                <a href="/admin/delete/{{ carte.id_carte }}?type=carte" class="btn btn-primary">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+        </div>
+    </section>
+{% endblock %}
