@@ -51,4 +51,6 @@ return [
     ['GET', '/admin/deck/{id:\d+}', 'admin@showDeck'],
 
 
+
+
 ];

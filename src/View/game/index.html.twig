@@ -1,13 +1,52 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <section>
-        <h1>Aucune création de deck en cours</h1>
-        {% if idCreateur %}
-            <p>Votre identifiant de créateur est : {{ idCreateur }}</p>
+    <div class="container">
+        <h1>Deck en cours</h1>
+
+        {% if texteCarte %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ texteCarte }}</h5>
+                    <p class="card-text">Choix 1 : {{ valeursChoix1 }}</p>
+                    <p class="card-text">Choix 2 : {{ valeursChoix2 }}</p>
+                </div>
+            </div>
         {% else %}
-            <p>Vous n'êtes pas connecté.</p>
+            <div class="alert alert-warning" role="alert">
+                {{ texteCarte }}
+            </div>
         {% endif %}
-		<a href="{{ url('/createurs/logout') }}">Déconnectez-vous</a>
-    </section>
+
+        <h2>Cartes dans le deck</h2>
+        <div class="row">
+            {% for i in range(1, totalCartes) %}
+                <div class="col-2">
+                    <div class="card mb-2" style="height: 100px; border: 1px dashed #ccc;">
+                        <div class="card-body text-center">
+                            <p>Carte {{ i }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h2>Ajouter une nouvelle carte</h2>
+        <form action="/createurs/add-card" method="POST">
+            <input type="hidden" name="deck_id" value="{{ deck.id_deck }}">
+            <div class="mb-3">
+                <label for="texte_carte" class="form-label">Texte de la carte</label>
+                <textarea class="form-control" id="texte_carte" name="texte_carte" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="valeurs_choix1" class="form-label">Valeurs choix 1</label>
+                <input type="text" class="form-control" id="valeurs_choix1" name="valeurs_choix1" required>
+            </div>
+            <div class="mb-3">
+                <label for="valeurs_choix2" class="form-label">Valeurs choix 2</label>
+                <input type="text" class="form-control" id="valeurs_choix2" name="valeurs_choix2" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter la carte</button>
+        </form>
+    </div>
 {% endblock %}
