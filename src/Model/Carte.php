@@ -29,4 +29,24 @@ class Carte extends Model
         }
         return null;
     }
+
+    public function getNumberOfCardsInDeck(int $deckId)
+    {
+        $sql = "SELECT COUNT(*) FROM carte WHERE id_deck = :deckId";
+        $stmt = $this->query($sql, [':deckId' => $deckId]);
+        if ($stmt) {
+            return $stmt->fetchColumn();
+        }
+        return 0;
+    }
+
+    public function getIfCreatorHasCreatedCard(int $creatorId, int $cardId)
+    {
+        $sql = "SELECT * FROM carte WHERE id_createur = :creatorId AND id_carte = :cardId";
+        $stmt = $this->query($sql, [':creatorId' => $creatorId, ':cardId' => $cardId]);
+        if ($stmt) {
+            return $stmt->fetch();
+        }
+        return null;
+    }
 }

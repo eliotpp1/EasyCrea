@@ -322,3 +322,75 @@
     exception-line: 227
     exception-file: 'D:\IUT\3ème année\-EasyCrea-\vendor\twig\twig\src\Loader\FilesystemLoader.php'
     exception-code: 'Unable to find template "base.html.twig" (looked into: D:\IUT\3ème année\-EasyCrea-\src\View) in "game/index.html.twig" at line 1.'
+[2024-10-15 16:49:48]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 107
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $messageErreur'
+[2024-10-15 16:50:05]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 107
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $messageErreur'
+[2024-10-15 16:50:07]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 107
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $messageErreur'
+[2024-10-15 16:53:09]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 108
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $messageErreur'
+[2024-10-15 17:12:12]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 106
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $error'
+[2024-10-15 17:12:20]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 106
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $error'
+[2024-10-15 17:14:28]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 248
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_createur' in 'field list''
+[2024-10-15 17:14:39]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 248
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_createur' in 'field list''

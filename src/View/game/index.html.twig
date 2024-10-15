@@ -2,51 +2,50 @@
 
 {% block content %}
     <div class="container">
-        <h1>Deck en cours</h1>
-
-        {% if texteCarte %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">{{ texteCarte }}</h5>
-                    <p class="card-text">Choix 1 : {{ valeursChoix1 }}</p>
-                    <p class="card-text">Choix 2 : {{ valeursChoix2 }}</p>
-                </div>
-            </div>
-        {% else %}
-            <div class="alert alert-warning" role="alert">
-                {{ texteCarte }}
-            </div>
-        {% endif %}
-
-        <h2>Cartes dans le deck</h2>
-        <div class="row">
+        <h1>{{ deck.titre_deck}}</h1>
+        <div class="d-flex flex-column align-items-center">
             {% for i in range(1, totalCartes) %}
-                <div class="col-2">
-                    <div class="card mb-2" style="height: 100px; border: 1px dashed #ccc;">
-                        <div class="card-body text-center">
-                            <p>Carte {{ i }}</p>
+                <div class="col-12 col-md-8 mb-1">
+                    {% if i == la_carte.ordre_soumission %}
+                        <!-- Afficher la carte attribuée en clair -->
+                        <div class="card" style="width: 100%; border: 1px solid #000;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ la_carte.texte_carte }}</h5>
+                                <p class="card-text">Choix 1 : {{ la_carte.valeurs_choix1 }}</p>
+                                <p class="card-text">Choix 2 : {{ la_carte.valeurs_choix2 }}</p>
+                            </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <!-- Afficher une carte masquée très petite -->
+                        <div class="card" style="width: 100%; height: 25px; border: 1px dashed #ccc; background-color: #f0f0f0;">
+                            <div class="card-body text-center p-0" style="font-size: 0.8em; line-height: 25px;">
+                                <p>Carte {{ i }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
-
-        <h2>Ajouter une nouvelle carte</h2>
-        <form action="/createurs/add-card" method="POST">
-            <input type="hidden" name="deck_id" value="{{ deck.id_deck }}">
-            <div class="mb-3">
-                <label for="texte_carte" class="form-label">Texte de la carte</label>
-                <textarea class="form-control" id="texte_carte" name="texte_carte" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="valeurs_choix1" class="form-label">Valeurs choix 1</label>
-                <input type="text" class="form-control" id="valeurs_choix1" name="valeurs_choix1" required>
-            </div>
-            <div class="mb-3">
-                <label for="valeurs_choix2" class="form-label">Valeurs choix 2</label>
-                <input type="text" class="form-control" id="valeurs_choix2" name="valeurs_choix2" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Ajouter la carte</button>
-        </form>
+        <div>
+            <h2>Ajouter une nouvelle carte</h2>
+            <form action="/game" method="POST">
+                <input type="hidden" name="deck_id" value="{{ deck.id_deck }}">
+                <div class="">
+                    <textarea class="form-control textarea" id="texte_carte" name="texte_carte" placeholder="Ma carte" required></textarea>
+                </div>
+                <div class="input">
+                    <label class="label">Choix 1</label>
+                    <input type="number" class="form-input" id="valeurs_choix1" name="valeurs_choix1" placeholder="Population" required>
+                    <input type="number" class="form-input" id="valeurs_choix1bis" name="valeurs_choix1bis" placeholder="Finances" required>
+                </div>
+                <div class="input">
+                    <label class="label">Choix 2</label>
+                    <input type="number" class="form-input" id="valeurs_choix2bis" name="valeurs_choix2bis" placeholder="Population" required>
+                    <input type="number" class="form-input" id="valeurs_choix2" name="valeurs_choix2" placeholder="Finances" required>
+                </div>
+                <button type="submit" class="button-contained">Ajouter la carte</button>
+            </form>
+        </div>
+        
     </div>
 {% endblock %}

@@ -24,6 +24,8 @@ return [
 
     // Gérer les actions quand utilisateur est connecté
     ['GET', '/game', 'game@index'],
+    ['POST', '/game', 'game@index'],
+
 
     // Gérer la déconnexion de l'utilisateur
     ['GET', '/createur/logout', 'createur@logout'],
