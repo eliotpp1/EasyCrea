@@ -300,3 +300,21 @@
     exception-line: 255
     exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Model\Model.php'
     exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause''
+[2024-10-16 16:07:08]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 122
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'compact(): Undefined variable $texteCarte'
+[2024-10-16 16:12:50]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'game@index',
+        2 => array(),
+    )
+    exception-line: 28
+    exception-file: 'D:\IUT\3ème année\-EasyCrea-\src\Controller\GameController.php'
+    exception-code: 'Undefined array key "id_createur"'

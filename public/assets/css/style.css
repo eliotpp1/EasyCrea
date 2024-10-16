@@ -412,3 +412,23 @@ body {
     margin-top: 5px;
   }
 }
+
+/* CSS */
+.logout-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+/* Styles spécifiques pour les petits écrans */
+@media (max-width: 576px) {
+  .logout-btn {
+    position: fixed; /* Fixer le bouton en haut à droite même lors du défilement */
+    top: 10px;
+    right: 10px;
+    font-size: 0.5rem; /* Taille de police adaptée pour les téléphones */
+    padding: 2.5px 5px; /* Réduire légèrement le padding pour un meilleur rendu */
+    background-color: #4e889b;
+  }
+}
