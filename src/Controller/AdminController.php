@@ -84,6 +84,11 @@ class AdminController extends Controller
             HTTP::redirect('/admin/login');
         }
 
+        $nb_deck = Deck::getInstance()->findAll();
+        if (count($nb_deck) >= 1) {
+            HTTP::redirect('/admin/dashboard?error=Vous avez déjà créé un deck');
+        }
+
         if ($this->isGetMethod()) {
             $this->display('admin/createDeck.html.twig');
         } else {
@@ -178,11 +183,13 @@ class AdminController extends Controller
             HTTP::redirect('/admin/login');
         }
 
+        $message = $_GET['success'] ?? null;
+
         // Récupérer les decks créés par l'administrateur
         $decks = Deck::getInstance()->findAll();
 
         // Afficher le tableau de bord
-        $this->display('admin/dashboard.html.twig', compact('decks'));
+        $this->display('admin/dashboard.html.twig', compact('decks', 'message'));
     }
 
     public function delete(int|string $id)
@@ -216,7 +223,53 @@ class AdminController extends Controller
     }
 
 
+    public function deactivate(int|string $id)
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
+        // Vérifier que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        $id = (int) $id;
+        if ($id <= 0) {
+            HTTP::redirect('/admin/dashboard');
+            return;
+        }
+
+        // Désactiver le deck
+        $success = Deck::getInstance()->update($id, ['live' => 0]);
+        var_dump($success);
+
+        // Rediriger vers le tableau de bord avec un message de succès ou d'erreur
+        $redirectUrl = $success ? '/admin/dashboard?success=desactivé' : '/admin/dashboard?success=désactivation_échouée';
+        HTTP::redirect($redirectUrl);
+    }
+
+    public function activate(int|string $id)
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        $id = (int)$id;
+
+        // Activer le deck
+        Deck::getInstance()->update($id, ['live' => 1]);
+
+        // Rediriger vers le tableau de bord après l'activation
+        HTTP::redirect('/admin/dashboard');
+    }
 
 
     public function showDeck(int|string $id)

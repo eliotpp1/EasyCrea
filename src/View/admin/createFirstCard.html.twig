@@ -2,9 +2,9 @@
 
 {% block content %}
     <section>
-        <div class="container">
+        <div class="container" class="form-title">
             <h2>Créer la première carte</h2>
-            <form action="{{ url('/createFirstCard') }}" method="POST">
+            <form action="{{ url('/createFirstCard') }}" method="POST" class="login-form">
                 <label for="texte_carte">Texte de la carte :</label>
                 <textarea id="texte_carte" name="texte_carte" required></textarea><br>
 
@@ -18,7 +18,7 @@
 
                 <input type="hidden" name="deckId" value="{{ deckId }}">
 
-                <button type="submit">Créer</button>
+                <button type="submit" class="submit-button">Créer</button>
             </form>
             {% if error %}
                 <div class="error">{{ error }}</div>

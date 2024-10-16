@@ -49,8 +49,13 @@ return [
     // Gérer le tableau de bord de l'administrateur
     ['GET', '/admin/dashboard', 'admin@dashboard'],
     ['GET', '/admin/delete/{id:\d+}', 'admin@delete'],
+    ['GET', '/admin/deactivate/{id:\d+}', 'admin@deactivate'],
+    ['GET', '/admin/activate/{id:\d+}', 'admin@activate'],
+
 
     ['GET', '/admin/deck/{id:\d+}', 'admin@showDeck'],
+
+    ['GET', '/noDecks', 'game@noDecks']
 
 
 

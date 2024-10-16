@@ -2,33 +2,23 @@
 
 {% block content %}
     <section>
-        <div class="container">
-            <h2>Cartes du deck  </h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Texte carte</th>
-                        <th scope="col">Valeur choix 1</th>
-                        <th scope="col">Valeur choix 2</th>
-                        <th scope="col">Date de soumission</th>
-                        <th scope="col">Ordre de soumission</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for carte in cartes %}
-                        <tr>
-                            <td>{{ carte.texte_carte }}</td>
-                            <td>{{ carte.valeurs_choix1 }}</td>
-                            <td>{{ carte.valeurs_choix2 }}</td>
-                            <td>{{ carte.date_soumission|date('d/m/Y') }}</td>
-                            <td>{{ carte.ordre_soumission }}</td> 
-                            <td>
-                                <a href="/admin/delete/{{ carte.id_carte }}?type=carte" class="btn btn-primary">Supprimer</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-
+    <div class="container">
+        <h2 class="section-title">Cartes du deck</h2>
+        <div class="card-list">
+            {% for carte in cartes %}
+                <div class="card-item">
+                    <h3 class="card-title">{{ carte.texte_carte }}</h3>
+                    <p><strong>Valeur choix 1 :</strong> {{ carte.valeurs_choix1 }}</p>
+                    <p><strong>Valeur choix 2 :</strong> {{ carte.valeurs_choix2 }}</p>
+                    <p><strong>Date de soumission :</strong> {{ carte.date_soumission|date('d/m/Y') }}</p>
+                    <p><strong>Ordre de soumission :</strong> {{ carte.ordre_soumission }}</p>
+                    <div class="card-actions">
+                        <a href="/admin/delete/{{ carte.id_carte }}?type=carte" class="btn btn-danger action-btn">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
+
 {% endblock %}

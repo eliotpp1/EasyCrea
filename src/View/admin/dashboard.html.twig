@@ -3,37 +3,38 @@
 {% block content %}
     <section>
         <div class="container">
-            <h2>Tous les decks</h2>
-            <a href="/createDeck" class="btn btn-primary">Ajouter un deck</a>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Date de début</th>
-                        <th scope="col">Date de fin</th>
-                        <th scope="col">Nombre de cartes</th>
-                        <th scope="col">Nombre de j'aimes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for deck in decks %}
-                        <tr>
-                            <td>{{ deck.titre_deck }}</td>
-                            <td>{{ deck.date_debut_deck|date('d/m/Y') }}</td>
-                            <td>{{ deck.date_fin_deck|date('d/m/Y') }}</td>
-                            <td>{{ deck.nb_cartes}}</td>
-                            <td>{{ deck.nb_jaime}}</td>
-                            <td>
-                                <a href="/admin/deck/{{ deck.id_deck }}" class="btn btn-primary">Voir deck</a>
-                            </td>
+            <h2 class="section-title">Tous les decks</h2>
+            {# Désactiver le bouton et ajouter un message d'erreur si nécessaire #}
+            <a href="/createDeck" class="btn btn-primary add-deck-btn" 
+               {% if error is defined %}disabled{% endif %}>Ajouter un deck</a>
+            
+            <p>Nombre de decks : {{ decks|length }}</p>
+            
+            {# Afficher le message d'erreur si défini #}
+            {% if error is defined %}
+                <p class="text-danger">{{ error }}</p>
+            {% endif %}
 
-                            <td>
-                                <a href="/admin/delete/{{ deck.id_deck }}?type=deck" class="btn btn-primary">Supprimer</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-
+            <div class="deck-list">
+                {% for deck in decks %}
+                    <div class="deck-card">
+                        <h3 class="deck-title">{{ deck.titre_deck }}</h3>
+                        <p>Date de début : {{ deck.date_debut_deck|date('d/m/Y') }}</p>
+                        <p>Date de fin : {{ deck.date_fin_deck|date('d/m/Y') }}</p>
+                        <p>Nombre de cartes : {{ deck.nb_cartes }}</p>
+                        <p>Nombre de j'aimes : {{ deck.nb_jaime }}</p>
+                        <div class="deck-actions">
+                            <a href="/admin/deck/{{ deck.id_deck }}" class="btn btn-primary action-btn">Voir deck</a>
+                            <a href="/admin/delete/{{ deck.id_deck }}?type=deck" class="btn btn-danger action-btn">Supprimer</a>
+                            {% if deck.live == 1 %}
+                                <a href="/admin/deactivate/{{ deck.id_deck }}" class="btn btn-warning action-btn">Désactiver</a>
+                            {% else %}
+                                <a href="/admin/activate/{{ deck.id_deck }}" class="btn btn-success action-btn">Activer</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </section>
 {% endblock %}

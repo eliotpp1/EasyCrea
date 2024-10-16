@@ -30,6 +30,14 @@ class GameController extends Controller
         // Vérifier si un deck est en live
         $deck = Deck::getInstance()->getLiveDeck(); // Méthode pour récupérer le deck live
 
+
+        // Vérifier si le deck trouvé en live n'est pas passé de date
+        if ($deck && strtotime($deck['date_fin_deck']) < time()) {
+            // Désactiver le deck
+            Deck::getInstance()->disableDeck($deck['id_deck']);
+            $deck = null;
+        }
+
         if ($deck) {
             // Vérifier si une carte aléatoire est déjà associée à ce deck et ce créateur
             $carteAleatoire = CarteAleatoire::getInstance()->getCardForDeckAndCreator($deck['id_deck'], $idCreateur);
@@ -60,15 +68,11 @@ class GameController extends Controller
                 // Récupérer les détails de la carte
                 $la_carte = Carte::getInstance()->getCardById($carteAleatoire['id_carte']);
                 $texteCarte = $la_carte['texte_carte'];
-                $valeursChoix1 = $la_carte['valeurs_choix1'];
-                $valeursChoix2 = $la_carte['valeurs_choix2'];
+                $valeursChoix1 = explode(',', $la_carte['valeurs_choix1']);
+                $valeursChoix2 = explode(',', $la_carte['valeurs_choix2']);
             }
         } else {
-            // Si aucun deck live
-            $texteCarte = "Aucune fabrication de deck en cours.";
-            $valeursChoix1 = '';
-            $valeursChoix2 = '';
-            $totalCartes = 0; // Pas de cartes si pas de deck
+            HTTP::redirect('/noDecks');
         }
 
         // Initialiser un message d'erreur
@@ -108,12 +112,31 @@ class GameController extends Controller
                     HTTP::redirect('/game');
                 } else {
                     // Afficher un message d'erreur si le deck est complet
+                    Deck::getInstance()->disableDeck($deck['id_deck']);
                     $error = "Le deck est complet. Vous ne pouvez pas ajouter plus de cartes.";
                 }
             }
         }
-
+        // dd($valeursChoix1, $valeursChoix2);
         // Passer les données à la vue
         $this->display('game/index.html.twig', compact('idCreateur', 'texteCarte', 'valeursChoix1', 'valeursChoix2', 'totalCartes', 'la_carte', 'deck', 'error'));
+    }
+
+
+
+    public function noDecks()
+    {
+        // Vérifier si la session est démarrée (si nécessaire)
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['id_createur'])) {
+            // Rediriger vers la page de connexion
+            HTTP::redirect('/createurs/login');
+        }
+        // Afficher la page d'erreur
+        $this->display('game/noDecks.html.twig');
     }
 }

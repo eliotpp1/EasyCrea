@@ -14,7 +14,7 @@ class Deck extends Model
 
     public function getLiveDeck()
     {
-        $sql = "SELECT * FROM deck WHERE live = 1 LIMIT 1"; // Récupère le premier deck en live
+        $sql = "SELECT * FROM deck WHERE live = 1 LIMIT 1";
         $sth = $this->query($sql);
         if ($sth) {
             return $sth->fetch();
@@ -30,5 +30,12 @@ class Deck extends Model
             return $sth->fetchColumn();
         }
         return 0;
+    }
+
+    public function disableDeck(int $deckId)
+    {
+        $sql = "UPDATE deck SET live = 0 WHERE id_deck = :deckId";
+        $sth = $this->query($sql, [':deckId' => $deckId]);
+        return $sth->rowCount() > 0;
     }
 }

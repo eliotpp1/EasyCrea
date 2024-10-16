@@ -2,8 +2,8 @@
 
 {% block content %}
 	<div class="container">
-		<h2>Créer votre compte</h2>
-		<form action="{{ url('/createurs/register') }}" method="POST">
+		<h2 class="form-title">Créer votre compte</h2>
+		<form action="{{ url('/createurs/register') }}" method="POST" class="login-form">
 			<label for="name">Nom :</label>
 			<input type="text" id="name" name="name" required><br>
 
@@ -22,7 +22,7 @@
 				<option value="femme">Femme</option>
 				<option value="autre">Autre</option>
 			</select><br>
-			<button type="submit">Créer</button>
+			<button type="submit" class="submit-button">Créer</button>
 		</form>
 	</section>
 

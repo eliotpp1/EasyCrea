@@ -3,8 +3,8 @@
 {% block content %}
     <section>
         <div class="container">
-            <h2>Créer une partie</h2>
-            <form action="{{ url('/createDeck') }}" method="POST">
+            <h2 class="form-title">Créer une partie</h2>
+            <form action="{{ url('/createDeck') }}" method="POST" class="login-form">
                 <label for="titre_deck">Titre du Deck :</label>
                 <input type="text" id="titre_deck" name="titre_deck" required><br>
 
@@ -19,7 +19,7 @@
 
     
 
-                <button type="submit">Créer</button>
+                <button type="submit" class="submit-button">Créer</button>
             </form>
             {% if error %}
                 <div class="error">{{ error }}</div>
