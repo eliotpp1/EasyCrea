@@ -49,4 +49,14 @@ class Carte extends Model
         }
         return null;
     }
+
+    public function  getIfCreatorHasCreatedCardInDeck(int $creatorId, int $deckId)
+    {
+        $sql = "SELECT * FROM carte WHERE id_createur = :creatorId AND id_deck = :deckId";
+        $stmt = $this->query($sql, [':creatorId' => $creatorId, ':deckId' => $deckId]);
+        if ($stmt) {
+            return $stmt->fetch();
+        }
+        return null;
+    }
 }

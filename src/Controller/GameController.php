@@ -13,93 +13,80 @@ class GameController extends Controller
 {
     public function index()
     {
-        // Vérifier si la session est démarrée (si nécessaire)
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Vérifier si l'utilisateur est connecté
         if (!isset($_SESSION['id_createur'])) {
-            // Rediriger vers la page de connexion
             HTTP::redirect('/createurs/login');
         }
 
-        // Récupérer l'id du créateur
         $idCreateur = $_SESSION['id_createur'];
-
-        // Vérifier si un deck est en live
-        $deck = Deck::getInstance()->getLiveDeck(); // Méthode pour récupérer le deck live
+        $deck = Deck::getInstance()->getLiveDeck();
 
 
-        // Vérifier si le deck trouvé en live n'est pas passé de date
+
         if ($deck && strtotime($deck['date_fin_deck']) < time()) {
-            // Désactiver le deck
             Deck::getInstance()->disableDeck($deck['id_deck']);
             $deck = null;
         }
 
         if ($deck) {
-            // Vérifier si une carte aléatoire est déjà associée à ce deck et ce créateur
-            $carteAleatoire = CarteAleatoire::getInstance()->getCardForDeckAndCreator($deck['id_deck'], $idCreateur);
+            $totalCartes = Deck::getInstance()->getTotalCardsInDeck($deck['id_deck']);
+            $carteAleatoire = null;
+            $carteCreeeDetails = null;
+            $carteCreee = Carte::getInstance()->getIfCreatorHasCreatedCardInDeck($idCreateur, $deck['id_deck']);
 
-            if (!$carteAleatoire) {
-                // Choisir une carte aléatoire
-                $carte = Carte::getInstance()->getRandomCard($deck['id_deck']); // Méthode pour récupérer une carte aléatoire
-
-                // Si une carte est trouvée, l'associer à ce deck et ce créateur
-                if ($carte) {
-                    CarteAleatoire::getInstance()->addCardForDeckAndCreator($deck['id_deck'], $idCreateur, $carte['id_carte']);
-                    $carteAleatoire = $carte;
+            if ($carteCreee) {
+                // Récupérer les détails de la carte créée
+                $carteCreeeDetails = Carte::getInstance()->getCardById($carteCreee['id_carte']);
+                $carteCréeValeurChoix1 = explode(',', $carteCreeeDetails['valeurs_choix1']);
+                $carteCréeValeurChoix1Final1 =  $carteCréeValeurChoix1[0];
+                $carteCréeValeurChoix1Final2 =  $carteCréeValeurChoix1[1];
+                $carteCréeValeurChoix2 = explode(',', $carteCreeeDetails['valeurs_choix2']);
+                $carteCréeValeurChoix2Final1 =  $carteCréeValeurChoix2[0];
+                $carteCréeValeurChoix2Final2 =  $carteCréeValeurChoix2[1];
+                // Récupérer la carte aléatoire pour l'afficher également
+                $carteAleatoire = CarteAleatoire::getInstance()->getCardForDeckAndCreator($deck['id_deck'], $idCreateur);
+                if (!$carteAleatoire) {
+                    $carteAleatoire = Carte::getInstance()->getRandomCard($deck['id_deck']);
+                    if ($carteAleatoire) {
+                        CarteAleatoire::getInstance()->addCardForDeckAndCreator($deck['id_deck'], $idCreateur, $carteAleatoire['id_carte']);
+                    }
+                } else {
+                    $carteAleatoire = Carte::getInstance()->getCardById($carteAleatoire['id_carte']);
                 }
             } else {
-                // Récupérer les détails de la carte associée
-                $carteAleatoire = Carte::getInstance()->getCardById($carteAleatoire['id_carte']);
-            }
-
-            // Récupérer le nombre total de cartes dans le deck
-            $totalCartes = Deck::getInstance()->getTotalCardsInDeck($deck['id_deck']); // Méthode pour récupérer le total des cartes
-
-            if (!$carteAleatoire) {
-                // Si aucune carte n'est trouvée dans le deck
-                $texteCarte = "Aucune carte disponible.";
-                $valeursChoix1 = '';
-                $valeursChoix2 = '';
-            } else {
-                // Récupérer les détails de la carte
-                $la_carte = Carte::getInstance()->getCardById($carteAleatoire['id_carte']);
-                $texteCarte = $la_carte['texte_carte'];
-                $valeursChoix1 = explode(',', $la_carte['valeurs_choix1']);
-                $valeursChoix2 = explode(',', $la_carte['valeurs_choix2']);
+                // Si l'utilisateur n'a pas créé de carte, on affiche seulement la carte aléatoire
+                $carteAleatoire = CarteAleatoire::getInstance()->getCardForDeckAndCreator($deck['id_deck'], $idCreateur);
+                if (!$carteAleatoire) {
+                    $carteAleatoire = Carte::getInstance()->getRandomCard($deck['id_deck']);
+                    if ($carteAleatoire) {
+                        CarteAleatoire::getInstance()->addCardForDeckAndCreator($deck['id_deck'], $idCreateur, $carteAleatoire['id_carte']);
+                    }
+                } else {
+                    $carteAleatoire = Carte::getInstance()->getCardById($carteAleatoire['id_carte']);
+                }
             }
         } else {
             HTTP::redirect('/noDecks');
         }
 
-        // Initialiser un message d'erreur
         $error = '';
 
-        // Vérifiez si la requête est POST pour ajouter une carte
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Vérifier si le créateur a déjà créé une carte
-            $cardAlreadyCreated = Carte::getInstance()->getIfCreatorHasCreatedCard($idCreateur);
-            if ($cardAlreadyCreated) {
-                // Ne rien faire et afficher un message d'erreur
+            if ($carteCreee) {
                 $error = "Vous avez déjà créé une carte.";
             } else {
-                // Récupérer les données du formulaire
                 $texteCarte = htmlspecialchars(trim($_POST['texte_carte']));
                 $valeursChoix1 = htmlspecialchars(trim($_POST['valeurs_choix1'] . ',' . $_POST['valeurs_choix1bis']));
                 $valeursChoix2 = htmlspecialchars(trim($_POST['valeurs_choix2bis'] . ',' . $_POST['valeurs_choix2']));
-
-                // Vérifier le nombre de cartes dans le deck
-                $carteDansLeDeck = Carte::getInstance()->getNumberOfCardsInDeck($deck['id_deck']); // Méthode pour récupérer le nombre de cartes dans le deck
+                $carteDansLeDeck = Carte::getInstance()->getNumberOfCardsInDeck($deck['id_deck']);
 
                 if ($carteDansLeDeck < $totalCartes) {
                     $ordreSoumission = $carteDansLeDeck + 1;
-
-                    // Créer la carte
                     Carte::getInstance()->create([
-                        'date_soumission' => (new \DateTime())->format('Y-m-d'), // Format de date adapté
+                        'date_soumission' => (new \DateTime())->format('Y-m-d'),
                         'ordre_soumission' => $ordreSoumission,
                         'valeurs_choix1' => $valeursChoix1,
                         'texte_carte' => $texteCarte,
@@ -108,19 +95,26 @@ class GameController extends Controller
                         'id_createur' => $idCreateur,
                     ]);
 
-                    // Rediriger vers la même page ou une autre page après l'ajout
                     HTTP::redirect('/game');
                 } else {
-                    // Afficher un message d'erreur si le deck est complet
                     Deck::getInstance()->disableDeck($deck['id_deck']);
                     $error = "Le deck est complet. Vous ne pouvez pas ajouter plus de cartes.";
                 }
             }
         }
-        // dd($valeursChoix1, $valeursChoix2);
-        // Passer les données à la vue
-        $this->display('game/index.html.twig', compact('idCreateur', 'texteCarte', 'valeursChoix1', 'valeursChoix2', 'totalCartes', 'la_carte', 'deck', 'error'));
+
+        $carteAleatoireValeursChoix1 = explode(',', $carteAleatoire['valeurs_choix1']);
+        $carteAleatoireValeursChoix2 = explode(',', $carteAleatoire['valeurs_choix2']);
+        $carteAleatoireValeursChoix1Final1 =  $carteAleatoireValeursChoix1[0];
+        $carteAleatoireValeursChoix1Final2 =  $carteAleatoireValeursChoix1[1];
+        $carteAleatoireValeursChoix2Final1 =  $carteAleatoireValeursChoix2[0];
+        $carteAleatoireValeursChoix2Final2 =  $carteAleatoireValeursChoix2[1];
+
+        $this->display('game/index.html.twig', compact('idCreateur', 'carteAleatoire', 'carteCreeeDetails', 'totalCartes', 'deck', 'error', 'carteCréeValeurChoix1Final1', 'carteCréeValeurChoix1Final2', 'carteCréeValeurChoix2Final1', 'carteCréeValeurChoix2Final2', 'carteAleatoireValeursChoix1Final1', 'carteAleatoireValeursChoix1Final2', 'carteAleatoireValeursChoix2Final1', 'carteAleatoireValeursChoix2Final2'));
     }
+
+
+
 
 
 
