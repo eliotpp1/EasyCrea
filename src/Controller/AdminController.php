@@ -86,7 +86,7 @@ class AdminController extends Controller
 
         $nb_deck = Deck::getInstance()->findAll();
         if (count($nb_deck) >= 1) {
-            HTTP::redirect('/admin/dashboard?error=Vous avez déjà créé un deck');
+            HTTP::redirect('/admin/dashboard?error=Un seul deck ne peut être créé à la fois');
         }
 
         if ($this->isGetMethod()) {
@@ -183,14 +183,16 @@ class AdminController extends Controller
             HTTP::redirect('/admin/login');
         }
 
-        $message = $_GET['success'] ?? null;
+        // Récupérer l'erreur s'il y en a une
+        $error = $_GET['error'] ?? null;
 
         // Récupérer les decks créés par l'administrateur
         $decks = Deck::getInstance()->findAll();
 
         // Afficher le tableau de bord
-        $this->display('admin/dashboard.html.twig', compact('decks', 'message'));
+        $this->display('admin/dashboard.html.twig', compact('decks', 'error'));
     }
+
 
     public function delete(int|string $id)
     {
@@ -284,13 +286,91 @@ class AdminController extends Controller
             HTTP::redirect('/admin/login');
         }
 
+        if (isset($_GET['success'])) {
+            $success = $_GET['success'];
+        } else {
+            $success = null;
+        }
+
         $id = (int)$id;
 
-        // Récupérer les cartes du deck
         $cartes = Carte::getInstance()->findAllBy(['id_deck' => $id]);
 
-        // Afficher les cartes du deck
-        $this->display('admin/showDeck.html.twig', compact('cartes'));
+        // Préparer les données des cartes avec les valeurs séparées
+        $cartesAvecValeurs = [];
+
+        foreach ($cartes as $carte) {
+            $valeursChoix1 = explode(',', $carte['valeurs_choix1']);
+            $valeursChoix2 = explode(',', $carte['valeurs_choix2']);
+
+            $cartesAvecValeurs[] = [
+                'id_carte' => $carte['id_carte'],
+                'texte_carte' => $carte['texte_carte'],
+                'valeurs_choix1' => [
+                    'Population' => $valeursChoix1[0] ?? null,
+                    'Finances' => $valeursChoix1[1] ?? null
+                ],
+                'valeurs_choix2' => [
+                    'Population' => $valeursChoix2[0] ?? null,
+                    'Finances' => $valeursChoix2[1] ?? null
+                ],
+                'ordre_soumission' => $carte['ordre_soumission']
+            ];
+        }
+
+        // Afficher les cartes du deck avec les valeurs séparées
+        $this->display('admin/showDeck.html.twig', compact('cartesAvecValeurs', 'success'));
+    }
+
+    public function edit(int|string $id)
+    {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Vérifiez que l'administrateur est connecté
+        if (!isset($_SESSION['id_administrateur'])) {
+            HTTP::redirect('/admin/login');
+        }
+
+        $id = (int)$id;
+
+        // Récupérer les données de la carte à modifier
+        $carte = Carte::getInstance()->findOneBy(['id_carte' => $id]);
+
+        // Vérifier si la carte existe
+        if (!$carte) {
+            HTTP::redirect('/admin/showDeck');
+            return;
+        }
+
+
+        // Vérifier si la méthode de la requête est GET
+        if ($this->isGetMethod()) {
+            $this->display('admin/edit.html.twig', compact('carte'));
+        } else {
+            // Récupérer les données du formulaire
+
+            $texteCarte = trim($_POST['texte_carte']);
+            $valeursChoix1 = trim($_POST['valeurs_choix1']);
+            $valeursChoix2 = trim($_POST['valeurs_choix2']);
+            $valeurs_choix1bis = trim($_POST['valeurs_choix1bis']);
+            $valeurs_choix2bis = trim($_POST['valeurs_choix2bis']);
+
+            $valeur_choixFinal = $valeursChoix1 . ',' . $valeurs_choix1bis;
+            $valeur_choixFinal2 = $valeursChoix2 . ',' . $valeurs_choix2bis;
+
+            // Mettre à jour la carte
+            $newCard = Carte::getInstance()->updateCard($id, [
+                'texte_carte' => $texteCarte,
+                'valeurs_choix1' => $valeur_choixFinal,
+                'valeurs_choix2' => $valeur_choixFinal2
+            ]);
+
+            // Rediriger vers le tableau de bord après la mise à jour
+            HTTP::redirect('/admin/deck/' . $carte['id_deck'] . '?success=carte_modifiee');
+        }
     }
 
     public function logout()

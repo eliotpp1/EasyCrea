@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-        <a href="/createurs/logout" class="btn logout-btn">Déconnexion</a>
+        <a href="{{ url('/createurs/logout') }}" class="btn logout-btn">Déconnexion</a>
         <h1>{{ deck.titre_deck }}</h1>
 
         <!-- Afficher le message d'erreur s'il existe -->
@@ -15,7 +15,7 @@
         <div class="d-flex flex-column align-items-center">
             {% for i in range(1, totalCartes) %}
                 <div class="col-12 col-md-8 mb-1">
-                    {% if carteCreeeDetails and i == carteCreeeDetails.ordre_soumission %}
+                    {% if carteCreeeDetails is not null and i == carteCreeeDetails.ordre_soumission %}
                         <!-- Afficher la carte créée selon l'ordre de soumission -->
                         <div class="card">
                             <div class="card-body text-center">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                    {% elseif carteAleatoire and i == carteAleatoire.ordre_soumission %}
+                    {% elseif carteAleatoire is not null and i == carteAleatoire.ordre_soumission %}
                         <!-- Afficher la carte aléatoire selon l'ordre de soumission -->
                         <div class="card">
                             <div class="card-body text-center">
@@ -75,10 +75,10 @@
 
         <div>
             <h2>Ajouter une nouvelle carte</h2>
-            <form action="/game" method="POST">
+            <form action="{{ url('/game') }}" method="POST">
                 <input type="hidden" name="deck_id" value="{{ deck.id_deck }}">
-                <div class="">
-                    <textarea class="form-control textarea" id="texte_carte" name="texte_carte" placeholder="Ma carte" required></textarea>
+                <div class="mb-3">
+                    <textarea class="form-control textarea" id="texte_carte" name="texte_carte" placeholder="Ma carte" minlength="50" maxlength="280" required></textarea>
                 </div>
                 <div class="input">
                     <label class="label">Choix 1</label>

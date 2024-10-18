@@ -59,4 +59,37 @@ class Carte extends Model
         }
         return null;
     }
+
+    public function updateCard(
+        int $id,
+        array $datas
+    ): bool {
+        if (empty($datas)) {
+            // Si aucune donnée à mettre à jour, renvoyer false
+            return false;
+        }
+
+        // Construction de la requête SQL
+        $sql = 'UPDATE `' . $this->tableName . '` SET ';
+        foreach (array_keys($datas) as $key) {
+            // Vérifier que la clé n'est pas vide ou ne contient pas de caractères spéciaux
+            if (!preg_match('/^[a-zA-Z0-9_]+$/', $key)) {
+                continue;
+            }
+            $sql .= "`{$key}` = :{$key},";
+        }
+        $sql = rtrim($sql, ','); // Enlever la dernière virgule
+        $sql .= ' WHERE id_carte = :id';
+
+        // Préparation des attributs
+        $attributes = [];
+        foreach ($datas as $k => $v) {
+            $attributes[':' . $k] = $v;
+        }
+        $attributes[':id'] = $id;
+
+        // Exécuter la requête
+        $sth = $this->query($sql, $attributes);
+        return $sth ? $sth->rowCount() > 0 : false;
+    }
 }

@@ -1,12 +1,12 @@
 {% extends 'layout.html.twig' %}
-{% block title %}les avatars{% endblock %}
+{% block title %}Erreur{% endblock %}
 {% block content %}
 <body>
   <main class="container vh-100">
     <div class="content h-100 d-flex justify-content-center align-items-center flex-column">
     <h1 class="display-1">Zut</h1>
     <p class="message">{{ message }}</p>
-    <a href="/" class="btn btn-primary btn-lg">Revenir sur la page d'accueil</a>
+    <a href="{{ url('/') }}" class="btn btn-primary btn-lg">Revenir sur la page d'accueil</a>
     </div>
 
   </main>

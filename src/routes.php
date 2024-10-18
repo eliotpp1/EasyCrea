@@ -31,8 +31,8 @@ return [
     ['GET', '/createur/logout', 'createur@logout'],
 
     // Gérer la création de l'administrateur
-    ['GET', '/admin/register', 'admin@register'],
-    ['POST', '/admin/register', 'admin@register'],
+    // ['GET', '/admin/register', 'admin@register'],
+    // ['POST', '/admin/register', 'admin@register'],
 
     // Gérer la connexion des administrateurs
     ['GET', '/admin/login', 'admin@login'],
@@ -51,6 +51,9 @@ return [
     ['GET', '/admin/delete/{id:\d+}', 'admin@delete'],
     ['GET', '/admin/deactivate/{id:\d+}', 'admin@deactivate'],
     ['GET', '/admin/activate/{id:\d+}', 'admin@activate'],
+    ['GET', '/admin/edit/{id:\d+}', 'admin@edit'],
+    ['POST', '/admin/edit/{id:\d+}', 'admin@edit'],
+
 
 
     ['GET', '/admin/deck/{id:\d+}', 'admin@showDeck'],
