@@ -113,3 +113,25 @@
 [2024-10-18 13:58:36]	[ALERT]	404 - commande non existante :: /admin/deck
 [2024-10-18 14:00:57]	[ALERT]	404 - commande non existante :: /admin/deck
 [2024-10-18 15:16:11]	[ALERT]	404 - commande non existante :: /admin/register
+[2024-10-18 16:16:16]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@showDeck',
+        2 => array(
+            'id' => '5',
+        ),
+    )
+    exception-line: 255
+    exception-file: 'D:\IUT\EasyCrea\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list''
+[2024-10-18 16:16:21]	[ALERT]	404 - erreur dans le processus de traitement du routage
+    routeInfo: array(
+        0 => 1,
+        1 => 'admin@showDeck',
+        2 => array(
+            'id' => '5',
+        ),
+    )
+    exception-line: 255
+    exception-file: 'D:\IUT\EasyCrea\src\Model\Model.php'
+    exception-code: 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list''

@@ -44,6 +44,9 @@
 						<p>
 							<strong>Ordre de soumission :</strong>
 							{{ carte.ordre_soumission }}</p>
+
+						<p> <strong>Créateur :</strong>
+							{{ carte.nom_createur }}</p>
 						<div class="card-actions">
 							<a href="{{ url('/admin/delete/' ~ carte.id_carte) }}?type=carte" class="btn btn-danger action-btn">Supprimer</a>
 						</div>

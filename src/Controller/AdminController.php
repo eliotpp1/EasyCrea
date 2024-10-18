@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Helper\HTTP;
 use App\Model\Admin;
 use App\Model\Carte;
+use App\Model\Createur;
 use App\Model\Deck;
 
 class AdminController extends Controller
@@ -286,20 +287,27 @@ class AdminController extends Controller
             HTTP::redirect('/admin/login');
         }
 
-        if (isset($_GET['success'])) {
-            $success = $_GET['success'];
-        } else {
-            $success = null;
-        }
-
+        $success = $_GET['success'] ?? null;
         $id = (int)$id;
 
+        // Récupérer les cartes du deck
         $cartes = Carte::getInstance()->findAllBy(['id_deck' => $id]);
 
-        // Préparer les données des cartes avec les valeurs séparées
+
+        // Préparer les données des cartes avec les valeurs séparées et le nom du créateur
         $cartesAvecValeurs = [];
 
         foreach ($cartes as $carte) {
+            // Récupérer le nom du créateur en fonction de l'id_createur ou de l'ad_email_admin
+            if (!empty($carte['id_createur'])) {
+                $nomCreateur = Createur::getInstance()->findCreatorName($carte['id_createur']) ?? 'Inconnu';
+            } else {
+                // Si l'id_createur n'est pas défini, utiliser l'email de l'administrateur
+                $administrateur = Admin::getInstance()->getAdminEmail($carte['id_administrateur']);
+
+                $nomCreateur = $administrateur ?? 'Administrateur inconnu';
+            }
+
             $valeursChoix1 = explode(',', $carte['valeurs_choix1']);
             $valeursChoix2 = explode(',', $carte['valeurs_choix2']);
 
@@ -314,13 +322,18 @@ class AdminController extends Controller
                     'Population' => $valeursChoix2[0] ?? null,
                     'Finances' => $valeursChoix2[1] ?? null
                 ],
-                'ordre_soumission' => $carte['ordre_soumission']
+                'ordre_soumission' => $carte['ordre_soumission'],
+                'nom_createur' => $nomCreateur
             ];
         }
 
-        // Afficher les cartes du deck avec les valeurs séparées
+        // Afficher les cartes du deck avec les valeurs séparées et le nom du créateur
         $this->display('admin/showDeck.html.twig', compact('cartesAvecValeurs', 'success'));
     }
+
+
+
+
 
     public function edit(int|string $id)
     {
