@@ -11,7 +11,7 @@
 			<input type="email" id="email" name="email" required><br>
 
 			<label for="password">Mot de passe :</label>
-			<input type="password" id="password" name="password" required><br>
+			<input type="password" id="password" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required><br>
 
 			<label for="ddn">Date de naissance :</label>
 			<input type="date" id="ddn" name="ddn" required><br>
@@ -23,6 +23,9 @@
 				<option value="autre">Autre</option>
 			</select><br>
 			<button type="submit" class="submit-button">Créer</button>
+			{% if error %}
+					<span class="text-danger">&#10008; {{ error }}</span>
+				{% endif %}
 		</form>
 	</section>
 

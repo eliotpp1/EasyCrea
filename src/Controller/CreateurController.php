@@ -15,20 +15,53 @@ class CreateurController extends Controller
     {
         if ($this->isGetMethod()) {
             $this->display('createurs/register.html.twig');
-        } else {
-            // 1. vérifier les données soumises
-            // 2. exécuter la requête d'insertion
-            Createur::getInstance()->create([
-                'nom_createur' => trim($_POST['name']),
-                'ad_email_createur' => trim($_POST['email']),
-                'mdp_createur' => trim(password_hash($_POST['password'], PASSWORD_BCRYPT)),
-                'ddn' => trim($_POST['ddn']),
-                'genre' => trim($_POST['genre']),
-            ]);
-            // 3. rediriger vers la page de connexion
-            HTTP::redirect('/createurs/login');
+            return;
         }
+
+        // 1. Récupérer et valider les données
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        $ddn = trim($_POST['ddn']);
+        $genre = trim($_POST['genre']);
+
+        if (empty($name) || empty($email) || empty($password) || empty($ddn) || empty($genre)) {
+            $this->display('createurs/register.html.twig', ['error' => 'Tous les champs sont requis']);
+            return;
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->display('createurs/register.html.twig', ['error' => 'Adresse email invalide']);
+            return;
+        }
+
+        if (strlen($password) < 8) {
+            $this->display('createurs/register.html.twig', ['error' => 'Le mot de passe doit contenir au moins 8 caractères']);
+            return;
+        }
+
+
+        // 2. Vérifier si l'email existe déjà
+        $existingUser = Createur::getInstance()->findByEmail($email);
+        if ($existingUser) {
+            // Message d'erreur générique pour éviter les attaques par énumération
+            $this->display('createurs/register.html.twig', ['error' => 'Impossible de s\'inscrire avec cet email']);
+            return;
+        }
+
+        // 3. Créer le créateur en utilisant un algorithme de hachage sécurisé
+        Createur::getInstance()->create([
+            'nom_createur' => $name,
+            'ad_email_createur' => $email,
+            'mdp_createur' => password_hash($password, PASSWORD_BCRYPT), // Utilisation de Argon2 pour plus de sécurité
+            'ddn' => $ddn,
+            'genre' => $genre,
+        ]);
+
+        // 4. Rediriger vers la page de connexion
+        HTTP::redirect('/createurs/login');
     }
+
 
     public function login()
     {

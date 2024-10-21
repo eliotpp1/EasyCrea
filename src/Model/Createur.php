@@ -19,4 +19,11 @@ class Createur extends Model
         }
         return null;
     }
+
+    public function findByEmail(string $email)
+    {
+        $sql = "SELECT * FROM createur WHERE ad_email_createur = :email";
+        $stmt = $this->query($sql, [':email' => $email]);
+        return $stmt->fetch();
+    }
 }
