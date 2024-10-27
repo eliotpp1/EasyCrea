@@ -45,7 +45,7 @@ class CreateurController extends Controller
         $existingUser = Createur::getInstance()->findByEmail($email);
         if ($existingUser) {
             // Message d'erreur générique pour éviter les attaques par énumération
-            $this->display('createurs/register.html.twig', ['error' => 'Impossible de s\'inscrire avec cet email']);
+            $this->display('createurs/register.html.twig', ['error' => 'Impossible de s\'inscrire avec cet email  ']);
             return;
         }
 

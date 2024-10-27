@@ -24,10 +24,11 @@ class GameController extends Controller
         $idCreateur = $_SESSION['id_createur'];
         $deck = Deck::getInstance()->getLiveDeck();
 
-        if ($deck && strtotime($deck['date_fin_deck']) < time()) {
+        if ($deck && (strtotime($deck['date_debut_deck']) > time() || strtotime($deck['date_fin_deck']) < time())) {
             Deck::getInstance()->disableDeck($deck['id_deck']);
             $deck = null;
         }
+
 
         if ($deck) {
             $totalCartes = Carte::getInstance()->getNumberOfCardsInDeck($deck['id_deck']);
